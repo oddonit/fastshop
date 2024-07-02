@@ -1,3 +1,3 @@
 class BaseCrudPrefixes:
     root: str = '/'
-    detail: str = '/{pk}'
+    detail: str = '/detail/{pk}'

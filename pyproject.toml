@@ -22,6 +22,9 @@ python-jose = {extras = ["cryptography"], version = "^3.3.0"}
 passlib = {extras = ["bcrypt"], version = "^1.7.4"}
 sqlmodel = {extras = ["full"], version = "^0.0.14"}
 pydantic = {extras = ["email"], version = "^2.5.2"}
+elasticsearch = {extras = ["async"], version = "^8.11.1"}
+elasticsearch-dsl = "^8.11.0"
+redis = "^5.0.1"
 
 
 [build-system]

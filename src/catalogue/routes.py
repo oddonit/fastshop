@@ -6,4 +6,5 @@ class CatalogueRoutesPrefixes:
 
 
 class ProductRoutesPrefixes(BaseCrudPrefixes):
-    ...
+    search: str = '/search'
+    update_index: str = '/update-index'

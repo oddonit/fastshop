@@ -6,6 +6,7 @@ from sqladmin import Admin
 from src.admin import register_admin_views
 from src.authentication.views import router as auth_router
 from src.base_settings import base_settings
+from src.catalogue.utils import ProductElasticManager
 from src.catalogue.views import product_router
 from src.common.databases.postgres import (
     engine,
@@ -19,6 +20,7 @@ from src.users.views import user_router
 @asynccontextmanager
 async def lifespan(application: FastAPI):  # noqa: ARG001
     await init_db()
+    await ProductElasticManager().init_indices()
 
     yield
 

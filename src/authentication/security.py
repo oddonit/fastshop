@@ -13,11 +13,12 @@ from passlib.context import CryptContext
 from src.base_settings import base_settings
 
 
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+pwd_context = CryptContext(schemes=['bcrypt'], deprecated='auto')
 
 
 def create_access_token(
-    subject: Union[str, Any], expires_delta: timedelta = None,
+    subject: Union[str, Any],
+    expires_delta: timedelta = None,
 ) -> str:
     if expires_delta:
         expire = datetime.utcnow() + expires_delta
@@ -25,7 +26,7 @@ def create_access_token(
         expire = datetime.utcnow() + timedelta(
             minutes=base_settings.auth.access_token_expire_minutes,
         )
-    to_encode = {"exp": expire, "sub": str(subject)}
+    to_encode = {'exp': expire, 'sub': str(subject)}
     encoded_jwt = jwt.encode(to_encode, base_settings.auth.secret_key, algorithm=base_settings.auth.algorithm)
     return encoded_jwt
 

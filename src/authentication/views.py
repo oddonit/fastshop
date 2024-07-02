@@ -32,13 +32,14 @@ async def get_token(
     user = await service.authenticate(email=form_data.username, password=form_data.password)
 
     if not user:
-        raise HTTPException(status_code=400, detail="Incorrect email or password")
+        raise HTTPException(status_code=400, detail='Incorrect email or password')
 
     access_token_expires = timedelta(minutes=base_settings.auth.access_token_expire_minutes)
 
     return {
-        "access_token": security.create_access_token(
-            user.id, expires_delta=access_token_expires,
+        'access_token': security.create_access_token(
+            user.id,
+            expires_delta=access_token_expires,
         ),
-        "token_type": "bearer",
+        'token_type': 'bearer',
     }

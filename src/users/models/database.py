@@ -27,14 +27,14 @@ class User(SQLModel, table=True):
     last_login: Optional[datetime] = None
     is_temporary: bool = False
 
-    addresses: List["UserAddress"] = Relationship(back_populates="user")
+    addresses: List['UserAddress'] = Relationship(back_populates='user')
 
 
 class UserAddress(SQLModel, table=True):
     __tablename__ = 'user_addresses'
 
     id: Optional[int] = Field(default=None, primary_key=True)
-    user_id: int = Field(foreign_key="users.id")
+    user_id: int = Field(foreign_key='users.id')
     title: Optional[str] = None
     city: str
     street: str
@@ -44,5 +44,4 @@ class UserAddress(SQLModel, table=True):
     floor: Optional[str] = None
     additional_info: Optional[str] = None
 
-    user: User = Relationship(back_populates="addresses")
-
+    user: User = Relationship(back_populates='addresses')

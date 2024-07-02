@@ -16,7 +16,7 @@ from src.users.models.database import User
 from src.users.services import get_user_service
 
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl='token')
 
 
 async def get_current_user(
@@ -25,12 +25,12 @@ async def get_current_user(
 ) -> User:
     credentials_exception = HTTPException(
         status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="Could not validate credentials",
-        headers={"WWW-Authenticate": "Bearer"},
+        detail='Could not validate credentials',
+        headers={'WWW-Authenticate': 'Bearer'},
     )
     try:
         payload = jwt.decode(token, base_settings.auth.secret_key, algorithms=[base_settings.auth.algorithm])
-        pk: int = payload.get("sub")
+        pk: int = payload.get('sub')
         if pk is None:
             raise credentials_exception
     except JWTError:
@@ -47,5 +47,5 @@ async def get_current_active_user(
     current_user: Annotated[User, Depends(get_current_user)],
 ):
     if not current_user.is_active:
-        raise HTTPException(status_code=400, detail="Inactive user")
+        raise HTTPException(status_code=400, detail='Inactive user')
     return current_user
